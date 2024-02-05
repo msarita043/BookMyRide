@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	Hello,
+	<span th:text="${userName}"></span>
+	<tr th:each="num: ${number}">
+		<td th:text="${num}"></td>
+	</tr>
+	<br />
+	<a href="/user-signup">Sign up</a>
+</body>
+</html>
