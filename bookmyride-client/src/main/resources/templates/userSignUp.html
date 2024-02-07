@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,26 +11,35 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<form method="post" th:action="@{/user-signup}" th:object="${users}">
+	<form method="post" action="#" th:action="@{/user-signup}"
+		th:object="${userSignupForm}">
 		<div class="mb-3">
-			<label for="name" class="form-label">Name</label> 
-			<input field="*{name}" type="text" class="form-control" id="name" />
+			<label for="name" class="form-label">Name</label> <input type="text"
+				class="form-control" id="name" name="name" />
+			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="text-danger"></p>
+
 		</div>
 		<div class="mb-3">
-			<label for="email" class="form-label">Email address</label> 
-			<input type="email" class="form-control" id="email" field="*{email}">
+			<label for="email" class="form-label">Email address</label> <input
+				type="email" class="form-control" id="email" name="email">
+			<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="text-danger"></p>
 		</div>
 		<div class="mb-3">
-			<label for="contact" class="form-label">Contact No</label> 
-			<input type="text" class="form-control" id="contact" field="*{contact}">
+			<label for="contact" class="form-label">Contact No</label> <input
+				type="text" class="form-control" id="contact" name="contact">
+			<p th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}" th:errorclass="text-danger"></p>
 		</div>
 		<div class="mb-3">
-			<label for="password" class="form-label">Password</label>
-			<input type="password" class="form-control" id="password" field="*{password}">
+			<label for="password" class="form-label">Password</label> <input
+				type="password" class="form-control" id="password" name="password">
+			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="text-danger"></p>
 		</div>
 		<div class="mb-3">
-			<label for="confirmPassword" class="form-label">Confirm Password</label>
-			<input type="password" class="form-control" id="confirmPassword" field="*{confirmPassword}">
+			<label for="confirmPassword" class="form-label">Confirm
+				Password</label> <input type="password" class="form-control"
+				id="confirmPassword" name="confirmPassword">
+			<p th:if="${#fields.hasErrors('confirmPassword')}"
+				th:errors="*{confirmPassword}" th:errorclass="text-danger"></p>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

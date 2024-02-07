@@ -1,13 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>User Dashboard</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
-<h2>User Dashboard</h2>
-	<h1>Welcome to BookMyRide</h1>
+
+<h2>Ride History</h2>
+
+<table class="ride-hist">
+	  <tr>
+	    <th>Last Ride On</th>
+	    <th>Driver</th>
+	    <th>Contact</th>
+	  </tr>
+	  <tr>
+	    <td>10-10-23</td>
+	    <td>Alex</td>
+	    <td>9824085</td>
+	  </tr>
+	  <tr>
+	    <td>21-2-23</td>
+	    <td>Amit</td>
+	    <td>24005824</td>
+	  </tr>
+	  <tr>
+	    <td>22-2-23</td>
+	    <td>Mahesh</td>
+	    <td>Austria</td>
+	  </tr>
+	  <tr>
+	    <td>23-09-24</td>
+	    <td>Ritika</td>
+	    <td>83445787</td>
+	  </tr>
+	  <tr>
+	    <td>34-34-23</td>
+	    <td>Hero</td>
+	    <td>3489235</td>
+	  </tr>
+	  <tr>
+	    <td>5-09-24</td>
+	    <td>Rakesh</td>
+	    <td>384757487</td>
+	  </tr>
+</table>
+  
+
 </body>
 </html>
