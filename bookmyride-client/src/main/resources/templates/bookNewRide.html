@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,51 +9,54 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 	<h1>Book New Ride</h1>
 	<form method="post" th:action="@{/book-new-ride}" th:object="${users}">
 		<div>
-			<a class="btn btn-primary" href="#" role="button">Back</a>
+			<a class="btn btn-primary" href="user-dashboard" role="button">Back</a>
 		</div>
 		<div>
-			<a class="btn btn-primary" href="#" role="button">Logout</a>
+			<a class="btn btn-primary" th:href="@{/logout}" role="button">Logout</a>
 		</div>
 		<div class="mb-3">
-			<label for="Cartype" class="form-label">Car Type</label> 
+			<label for="Cartype" class="form-label">Car Type</label>
 			<div class="form-check">
-  			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  			  <label class="form-check-label" for="flexRadioDefault1">Mini</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault1"> <label class="form-check-label"
+					for="flexRadioDefault1">Mini</label>
 			</div>
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-			  <label class="form-check-label" for="flexRadioDefault2">Sedan</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault2" checked> <label
+					class="form-check-label" for="flexRadioDefault2">Sedan</label>
 			</div>
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
-			  <label class="form-check-label" for="flexRadioDefault3">SUV</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault3" checked> <label
+					class="form-check-label" for="flexRadioDefault3">SUV</label>
 			</div>
-			
+
 		</div>
 		<div class="mb-3">
-			<label for="travelhours" class="form-label">Travel Hours</label> 
-			<input type="number" class="form-control" id="travelhours" field="*{travelhours}">
+			<label for="travelhours" class="form-label">Travel Hours</label> <input
+				type="number" class="form-control" id="travelhours"
+				field="*{travelhours}">
 		</div>
 		<div class="mb-3">
-			<label for="charges" class="form-label">Estimated Charges</label> 
-			<div>
-				Estimated charges code
-			</div>	
+			<label for="charges" class="form-label">Estimated Charges</label>
+			<div>Estimated charges code</div>
 		</div>
 		<div class="mb-3">
-			<label for="pickuptime" class="form-label">Pickup Time</label>
-			<input type="time" class="form-control" id="pickuptime" field="*{pickuptime}">
+			<label for="pickuptime" class="form-label">Pickup Time</label> <input
+				type="time" class="form-control" id="pickuptime"
+				field="*{pickuptime}">
 		</div>
 		<div class="mb-3">
 			<label for="location" class="form-label">Pickup Location</label>
-			<div>
-				Pickup location code
-			</div>
+			<div>Pickup location code</div>
 		</div>
 		<button type="submit" class="btn btn-primary">Book</button>
 	</form>
