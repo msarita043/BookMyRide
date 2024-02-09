@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,68 +9,77 @@
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 	<div>
-		<a class="btn btn-primary" href="#" role="button">Add New Driver</a>
+		<a class="btn btn-primary" href="driver-dashboard" role="button">Back</a>
 	</div>
 	<div>
-		<a class="btn btn-primary" href="#" role="button">Logout</a>
+		<a class="btn btn-primary" th:href="@{/logout}" role="button">Logout</a>
 	</div>
 	<form method="post" th:action="@{/}" th:object="${users}">
 		<div class="mb-3">
-			<label for="name" class="form-label">Name</label> 
-			<input field="*{name}" type="text" class="form-control" id="name" />
+			<label for="name" class="form-label">Name</label> <input
+				field="*{name}" type="text" class="form-control" id="name" />
 		</div>
 		<div class="mb-3">
-			<label for="email" class="form-label">Email address</label> 
-			<input type="email" class="form-control" id="email" field="*{email}">
+			<label for="email" class="form-label">Email address</label> <input
+				type="email" class="form-control" id="email" field="*{email}">
 		</div>
 		<div class="mb-3">
-			<label for="contact" class="form-label">Contact No</label> 
-			<input type="text" class="form-control" id="contact" field="*{contact}">
+			<label for="contact" class="form-label">Contact No</label> <input
+				type="text" class="form-control" id="contact" field="*{contact}">
 		</div>
 		<div class="mb-3">
 			<label for="cartype" class="form-label">Car Type</label>
 			<div class="form-check">
-  			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  			  <label class="form-check-label" for="flexRadioDefault1">Mini</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault1"> <label class="form-check-label"
+					for="flexRadioDefault1">Mini</label>
 			</div>
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-			  <label class="form-check-label" for="flexRadioDefault2">Sedan</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault2" checked> <label
+					class="form-check-label" for="flexRadioDefault2">Sedan</label>
 			</div>
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-			  <label class="form-check-label" for="flexRadioDefault2">SUV</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault2" checked> <label
+					class="form-check-label" for="flexRadioDefault2">SUV</label>
 			</div>
 		</div>
 		<div class="mb-3">
-			<label for="carmodel" class="form-label">Car Model</label>
-			<input type="text" class="form-control" id="carmodel" field="*{carmodel}">
+			<label for="carmodel" class="form-label">Car Model</label> <input
+				type="text" class="form-control" id="carmodel" field="*{carmodel}">
 		</div>
 		<div class="mb-3">
-			<label for="carmodel" class="form-label">Car Number</label>
-			<input type="text" class="form-control" id="carmodel" field="*{carnumber}">
+			<label for="carmodel" class="form-label">Car Number</label> <input
+				type="text" class="form-control" id="carmodel" field="*{carnumber}">
 		</div>
 		<div class="mb-3">
-			<label for="Cartype" class="form-label">Activation Status</label> 
+			<label for="Cartype" class="form-label">Activation Status</label>
 			<div class="form-check">
-  			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  			  <label class="form-check-label" for="flexRadioDefault1">Y</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault1"> <label class="form-check-label"
+					for="flexRadioDefault1">Y</label>
 			</div>
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-			  <label class="form-check-label" for="flexRadioDefault2">N</label>
+				<input class="form-check-input" type="radio" name="flexRadioDefault"
+					id="flexRadioDefault2" checked> <label
+					class="form-check-label" for="flexRadioDefault2">N</label>
 			</div>
 		</div>
 		<div class="mb-3">
-			<label for="password" class="form-label">Password</label>
-			<input type="password" class="form-control" id="password" field="*{password}">
+			<label for="password" class="form-label">Password</label> <input
+				type="password" class="form-control" id="password"
+				field="*{password}">
 		</div>
 		<div class="mb-3">
-			<label for="confirmPassword" class="form-label">Confirm Password</label>
-			<input type="password" class="form-control" id="confirmPassword" field="*{confirmPassword}">
+			<label for="confirmPassword" class="form-label">Confirm
+				Password</label> <input type="password" class="form-control"
+				id="confirmPassword" field="*{confirmPassword}">
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
