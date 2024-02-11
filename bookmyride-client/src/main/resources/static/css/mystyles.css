@@ -1,0 +1,29 @@
+.large-icon {
+	font-size: 150px;
+}
+
+.mt-8 {
+	margin-top: 100px
+}
+
+/* Generated using https://mdbootstrap.com/docs/standard/tools/design/gradients/ */
+.gradient-flyhigh {
+    /* fallback for old browsers */
+    background: #48c6ef;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(72,198,239,1), rgba(111,134,214,1));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(72,198,239,1), rgba(111,134,214,1))
+  }
+  .gradient-winterneva {
+    /* fallback for old browsers */
+    background: #a1c4fd;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(161,196,253,0.4), rgba(194,233,251,0.4));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(161,196,253,0.4), rgba(194,233,251,0.4))
+  }

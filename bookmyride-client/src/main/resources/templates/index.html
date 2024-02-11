@@ -4,52 +4,58 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Book my Ride</title>
+<!-- Font Awesome -->
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+	rel="stylesheet" />
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	rel="stylesheet" />
+<!-- MDB -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+	rel="stylesheet" />
+<link href="/css/mystyles.css" rel="stylesheet" />
 <body>
-	<div class="vh-100">
-		<div class="container d-flex justify-content-center p-4">
-			<p class="fs-1 fw-bolder">Book my ride</p>
-		</div>
-		<div class="container">
-			<div class="card">
-				<div class="card-header">Login</div>
-				<div class="card-body">
-					<form method="post" action="#" th:action="@{/login}"
-						th:object="${userLoginForm}">
+	<div class="container-fluid">
+		<div class="row row-12 vh-100">
+			<div class="col col-md-8 col-sm-12 gradient-winterneva">
+				<div class="fs-1 fw-bolder text-center m-5">Book My Ride</div>
+				<div class="fs-4 text-center m-3">Login to Your Account</div>
+				<form method="post" action="#" th:action="@{/login}"
+					th:object="${userLoginForm}">
+					<div class="mb-3 p-3" style="height: 12vh;">
+						<input type="email" class="form-control rounded-pill" id="email"
+							name="email" placeholder="Enter Your Email...">
+						<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+							th:errorclass="text-danger"></p>
+					</div>
+					<div class="mb-3 p-3" style="height: 12vh;">
+						<input type="password" class="form-control rounded-pill"
+							id="password" name="password" placeholder="Enter Your Password...">
+						<p th:if="${#fields.hasErrors('password')}"
+							th:errors="*{password}" th:errorclass="text-danger"></p>
+					</div>
+					<div class="d-flex justify-content-center">
+						<button type="submit"
+							class="btn btn-info rounded-pill text-light w-25 fw-medium">Sign
+							In</button>
+					</div>
 
-						<div class="mb-3">
-							<label for="email" class="form-label">Email address</label> <input
-								type="email" class="form-control" id="email" name="email">
-							<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-								th:errorclass="text-danger"></p>
-						</div>
-
-						<div class="mb-3">
-							<label for="password" class="form-label">Password</label> <input
-								type="password" class="form-control" id="password"
-								name="password">
-							<p th:if="${#fields.hasErrors('password')}"
-								th:errors="*{password}" th:errorclass="text-danger"></p>
-						</div>
-
-						<button type="submit" class="btn btn-primary">Login</button>
-						<a class="btn btn-primary" href="/user-signup" role="button">User SignUp</a>
-					</form>
+				</form>
+			</div>
+			<div
+				class="col col-md-4 col-sm-12 d-flex justify-content-center flex-column gradient-flyhigh">
+				<p class="text-center fs-3 fw-bolder text-white">New Here ?</p>
+				<div class="d-flex justify-content-center">
+					<a class="btn btn-light btn-rounded text-dark w-25 fw-medium"
+						href="/user-signup" role="button">Sign Up</a>
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
 </body>
 </html>
