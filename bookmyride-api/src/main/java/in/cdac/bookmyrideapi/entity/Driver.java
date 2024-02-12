@@ -1,11 +1,11 @@
 package in.cdac.bookmyrideapi.entity;
 
-import java.math.BigInteger;
 
 import in.cdac.bookmyrideapi.enums.ActivationStatus;
-import in.cdac.bookmyrideapi.enums.Roles;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,8 +15,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "driver")
 @Data
+@Table(name="Driver")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Driver {
@@ -25,19 +25,21 @@ public class Driver {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "DRIVER_ID")
 	private Integer driverId;
+
+	@Column(name="USER_ID")
+	private Integer userID;
 	
-	@Column(name = "DRIVER_ID")
-	private Integer userId;
+	@Column(name= "CAR_TYPE_ID")
+	private Integer carTypeID;
 	
-	
-	private Integer carTypeId;
-	
-	
+	@Column(name= "CAR_MODEL")
 	private String carModel;
 	
-	
+	@Column(name = "CAR_REG_NO")
 	private String carRegNo;
 	
-	
+	@Column(name = "ACTIVATION_STATUS")
+	@Enumerated(EnumType.STRING)
 	private ActivationStatus activationStatus;
+
 }
