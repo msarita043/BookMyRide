@@ -2,48 +2,42 @@ package in.cdac.bookmyrideapi.entity;
 
 import java.math.BigInteger;
 
+import in.cdac.bookmyrideapi.enums.ActivationStatus;
 import in.cdac.bookmyrideapi.enums.Roles;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "driver")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class Driver {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USER_ID")
+	@Column(name = "DRIVER_ID")
+	private Integer driverId;
+	
+	@Column(name = "DRIVER_ID")
 	private Integer userId;
 	
-
-	@OneToMany(mappedBy="ride_bookings")
-	private RideBookings rideBookings;
 	
-	@Column(name="EMAIL_ID")
-	private String email;
+	private Integer carTypeId;
 	
-	@Column(name="NAME")
-	private String name;
 	
-	@Column(name="CONTACT_NO")
-	private BigInteger contactNo;
+	private String carModel;
 	
-	@Column(name="PASSWORD")
-	private String password;
 	
-	@Column(name="ROLE")
-	@Enumerated(EnumType.STRING)
-	private Roles role;
+	private String carRegNo;
+	
+	
+	private ActivationStatus activationStatus;
 }
