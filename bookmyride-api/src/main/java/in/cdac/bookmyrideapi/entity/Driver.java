@@ -1,4 +1,4 @@
-package in.cdac.bookmyrideapi.entity;
+	package in.cdac.bookmyrideapi.entity;
 
 
 import in.cdac.bookmyrideapi.enums.ActivationStatus;
@@ -9,6 +9,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,11 +28,13 @@ public class Driver {
 	@Column(name = "DRIVER_ID")
 	private Integer driverId;
 
-	@Column(name="USER_ID")
-	private Integer userID;
+	@ManyToOne
+	@JoinColumn(name="USER_ID",nullable=false)
+	private Users users;
 	
-	@Column(name= "CAR_TYPE_ID")
-	private Integer carTypeID;
+	@ManyToOne
+	@JoinColumn(name="CAR_TYPE_ID",nullable=false)
+	private CarType carType;
 	
 	@Column(name= "CAR_MODEL")
 	private String carModel;

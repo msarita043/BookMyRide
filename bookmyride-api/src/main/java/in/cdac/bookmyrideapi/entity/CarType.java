@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,10 +21,6 @@ public class CarType {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="CAR_TYPE_ID")
 	private Integer carTypeId;
-	
-	
-	@OneToMany(mappedBy="ride_bookings")
-	private RideBookings rideBookings;
 	
 	@Column(name="CAR_TYPE")
 	private String carType;
