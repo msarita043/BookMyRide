@@ -1,5 +1,6 @@
 package in.cdac.bookmyrideapi.entity;
 
+
 import in.cdac.bookmyrideapi.enums.ActivationStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +25,7 @@ public class Driver {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "DRIVER_ID")
 	private Integer driverId;
-	
+
 	@Column(name="USER_ID")
 	private Integer userID;
 	
