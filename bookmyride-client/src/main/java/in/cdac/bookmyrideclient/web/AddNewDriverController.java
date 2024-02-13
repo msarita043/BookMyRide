@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import in.cdac.bookmyrideclient.model.CarType;
 import in.cdac.bookmyrideclient.model.Users;
 import in.cdac.bookmyrideclient.service.CarTypeService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class AddNewDriverController {
@@ -38,10 +40,14 @@ public class AddNewDriverController {
 	}
 	
 	@PostMapping("/add-new-driver")
-	public String addNewDriver(@ModelAttribute("addNewDriverForm") AddNewDriverForm addNewDriverForm, Model model) {
+	public String addNewDriver(@Valid @ModelAttribute("addNewDriverForm") AddNewDriverForm addNewDriverForm,BindingResult validationErrorResult, Model model ) {
 		
+		List<CarType> carTypeList = carTypeService.getAllCarTypes();
+		model.addAttribute("cartypes", carTypeList);
 		
-		System.out.println(addNewDriverForm.getName());
+		if (validationErrorResult.hasErrors()) {
+			return "addNewDriver";
+		} 
 		
 		
 		return "addNewDriver";

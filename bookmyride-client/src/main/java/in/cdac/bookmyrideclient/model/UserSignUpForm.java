@@ -13,20 +13,20 @@ import lombok.Data;
 public class UserSignUpForm {
 	
 	@Length(min = 3, max = 30)
-	@NotEmpty(message = "Name cannot be empty")
+	@NotEmpty(message = "Name cannot be empty.")
 	private String name;
 	
 	@Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-	@NotEmpty(message = "Email cannot be empty")
+	@NotEmpty(message = "Email cannot be empty.")
 	private String email;
 	
-	@NotNull(message = "contact cannot be empty.")
+	@NotNull(message = "Contact can't be empty.")
 	private BigInteger contact;
 	
-	@NotEmpty(message = "password cannot be empty.")
+	@NotEmpty(message = "Password can't be empty.")
 	@Length(min = 6, max=30)
 	private String password;
 	
-	@NotEmpty(message = "Confirm password cannot be empty.")
+	@NotEmpty(message = "Confirm password can not be empty.")
 	private String confirmPassword;
 }
