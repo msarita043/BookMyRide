@@ -1,6 +1,7 @@
 package in.cdac.bookmyrideclient.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import in.cdac.bookmyrideclient.model.AddNewDriverForm;
 import in.cdac.bookmyrideclient.model.CarType;
 import in.cdac.bookmyrideclient.model.Users;
 import in.cdac.bookmyrideclient.service.CarTypeService;
+import in.cdac.bookmyrideclient.service.UsersService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
@@ -23,9 +25,12 @@ public class AddNewDriverController {
 
 	@Autowired
 	CarTypeService carTypeService;
+	@Autowired
+	UsersService usersService;
 
 	@GetMapping("/add-new-driver")
-	public String addNewDriver(@ModelAttribute("addNewDriverForm") AddNewDriverForm addNewDriverForm, Model model, HttpSession httpSession) {
+	public String addNewDriver(@ModelAttribute("addNewDriverForm") AddNewDriverForm addNewDriverForm, Model model,
+			HttpSession httpSession) {
 		if (httpSession.getAttribute("user") == null) {
 			return "redirect:/";
 		}
@@ -38,18 +43,33 @@ public class AddNewDriverController {
 		model.addAttribute("cartypes", carTypeList);
 		return "addNewDriver";
 	}
-	
+
 	@PostMapping("/add-new-driver")
-	public String addNewDriver(@Valid @ModelAttribute("addNewDriverForm") AddNewDriverForm addNewDriverForm,BindingResult validationErrorResult, Model model ) {
-		
+	public String addNewDriver(@Valid @ModelAttribute("addNewDriverForm") AddNewDriverForm addNewDriverForm,
+			BindingResult validationErrorResult, Model model) {
+
 		List<CarType> carTypeList = carTypeService.getAllCarTypes();
 		model.addAttribute("cartypes", carTypeList);
-		
+
 		if (validationErrorResult.hasErrors()) {
 			return "addNewDriver";
-		} 
-		
-		
-		return "addNewDriver";
+		} else {
+			Users u = usersService.getUser(addNewDriverForm);
+			Map<String, Boolean> isUserExist = usersService.isUserExist(u);
+			if (isUserExist.get("email")) {
+				validationErrorResult.rejectValue("email", "error.userSignupForm", "Email Already Exists.");
+			}
+			if (isUserExist.get("contact")) {
+				validationErrorResult.rejectValue("contact", "error.userSignupForm", "ContactNo Already Exists.");
+			}
+
+			if (validationErrorResult.hasErrors()) {
+				return "addNewDriver";
+			} else {
+				Users newUser = usersService.addNewUser(u);
+
+				return "redirect:/admin-dashboard";
+			}
+		}
 	}
 }
