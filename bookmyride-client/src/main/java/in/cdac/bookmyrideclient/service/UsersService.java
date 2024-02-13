@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import in.cdac.bookmyrideclient.enums.Roles;
+import in.cdac.bookmyrideclient.model.AddNewDriverForm;
 import in.cdac.bookmyrideclient.model.UserLoginForm;
 import in.cdac.bookmyrideclient.model.UserSignUpForm;
 import in.cdac.bookmyrideclient.model.Users;
@@ -25,6 +26,16 @@ public class UsersService {
 		u.setContactNo(userSignUpForm.getContact());
 		u.setPassword(userSignUpForm.getPassword());
 		u.setRole(Roles.USER);
+		return u;
+	}
+	
+	public Users getUser(AddNewDriverForm addNewDriverForm) {
+		Users u = new Users();
+		u.setName(addNewDriverForm.getName());
+		u.setEmail(addNewDriverForm.getEmail());
+		u.setContactNo(addNewDriverForm.getContact());
+		u.setPassword(addNewDriverForm.getDriverPassword());
+		u.setRole(Roles.DRIVER);
 		return u;
 	}
 	
