@@ -17,8 +17,8 @@ public class CarTypeController {
 	@Autowired
 	CarTypeDAO carTypeDao;
 	
-	@GetMapping("/getAllCars")
-	public List<CarType> getAllCars() {
+	@GetMapping("/getAllCarTypes")
+	public List<CarType> getAllCarTypes() {
 		return carTypeDao.findAll();
 	}
 	

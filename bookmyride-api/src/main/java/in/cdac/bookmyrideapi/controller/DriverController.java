@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.cdac.bookmyrideapi.entity.Driver;
+import in.cdac.bookmyrideapi.entity.Users;
 import in.cdac.bookmyrideapi.repositories.DriverDAO;
 
 @RestController
@@ -15,10 +18,15 @@ import in.cdac.bookmyrideapi.repositories.DriverDAO;
 public class DriverController {
 	
 	@Autowired
-	DriverDAO driverDao;
+	DriverDAO driverDAO;
 	
 	@GetMapping("/getDrivers")
 	public List<Driver> getAllDrivers() {
-		return driverDao.findAll();
+		return driverDAO.findAll();
+	}
+	
+	@PostMapping("/saveDrivers")
+	public Driver saveDriver(@RequestBody Driver driver) {
+		return driverDAO.save(driver);
 	}
 }
