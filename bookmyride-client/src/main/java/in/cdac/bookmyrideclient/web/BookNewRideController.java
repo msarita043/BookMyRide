@@ -38,7 +38,7 @@ public class BookNewRideController {
 		return "bookNewRide";
 	}
 	
-	@PostMapping("/book-new-ride)")
+	@PostMapping("/book-new-ride")
 	public String bookNewRide(@ModelAttribute("BookNewRideForm") BookNewRideForm bookNewRideForm, Model model) {
 		
 		

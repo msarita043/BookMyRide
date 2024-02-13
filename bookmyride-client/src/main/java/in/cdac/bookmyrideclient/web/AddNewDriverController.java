@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import in.cdac.bookmyrideclient.enums.Roles;
 import in.cdac.bookmyrideclient.model.AddNewDriverForm;
 import in.cdac.bookmyrideclient.model.CarType;
+import in.cdac.bookmyrideclient.model.Driver;
 import in.cdac.bookmyrideclient.model.Users;
 import in.cdac.bookmyrideclient.service.CarTypeService;
+import in.cdac.bookmyrideclient.service.DriverService;
 import in.cdac.bookmyrideclient.service.UsersService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -27,6 +29,9 @@ public class AddNewDriverController {
 	CarTypeService carTypeService;
 	@Autowired
 	UsersService usersService;
+	@Autowired
+	DriverService driverService;
+	
 
 	@GetMapping("/add-new-driver")
 	public String addNewDriver(@ModelAttribute("addNewDriverForm") AddNewDriverForm addNewDriverForm, Model model,
@@ -57,18 +62,27 @@ public class AddNewDriverController {
 			Users u = usersService.getUser(addNewDriverForm);
 			Map<String, Boolean> isUserExist = usersService.isUserExist(u);
 			if (isUserExist.get("email")) {
-				validationErrorResult.rejectValue("email", "error.userSignupForm", "Email Already Exists.");
+				validationErrorResult.rejectValue("email", "error.addNewDriverForm", "Email Already Exists.");
 			}
 			if (isUserExist.get("contact")) {
-				validationErrorResult.rejectValue("contact", "error.userSignupForm", "ContactNo Already Exists.");
+				validationErrorResult.rejectValue("contact", "error.addNewDriverForm", "ContactNo Already Exists.");
 			}
 
 			if (validationErrorResult.hasErrors()) {
 				return "addNewDriver";
 			} else {
 				Users newUser = usersService.addNewUser(u);
+				
+				Driver d = driverService.getDriver(addNewDriverForm, newUser);
 
-				return "redirect:/admin-dashboard";
+				Driver newDriver = driverService.addNewDriver(d);
+				
+				if(newDriver.getDriverId() != null) {	
+					return "redirect:/admin-dashboard";
+				}else {
+					validationErrorResult.rejectValue("name", "error.addNewDriverForm", "There is some error!");
+				}
+				return "addNewDriver";
 			}
 		}
 	}
