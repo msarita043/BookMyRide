@@ -18,7 +18,7 @@
 	rel="stylesheet" />
 <link href="/css/mystyles.css" rel="stylesheet" />
 </head>
-<body>
+<body class="gradient-winterneva">
 	<div
 		class="container-fluid d-flex justify-content-between gradient-flyhigh">
 		<p class="m-3 text-white">
@@ -38,7 +38,7 @@
 		</div>
 
 		<div class="table-responsive">
-			<table class="table table-bordered table-sm ">
+			<table class="table table-borderless table-sm table-hover">
 				<thead>
 					<tr>
 						<th scope="col">ID</th>
@@ -47,51 +47,24 @@
 						<th scope="col">Contact</th>
 						<th scope="col">Car Type</th>
 						<th scope="col">Car Model</th>
-						<th scope="col">Car Number</th>
+						<th scope="col">Car Registration Number</th>
 						<th scope="col">Activation Status</th>
 						<th scope="col">Updates</th>
 						<th scope="col">Ride History</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Abhay</td>
-						<td>abhay@gmail.com</td>
-						<td>9998579950</td>
-						<td>Mini</td>
-						<td>Hyundai i10</td>
-						<td>MH12AB1232</td>
-						<td>Y</td>
-						<td><a class="btn btn-primary" href="#" role="button">Update</a></td>
-						<td><a class="btn btn-primary" href="#" role="button">Ride
-								History</a></td>
-
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Rakesh</td>
-						<td>rak@gmail.com</td>
-						<td>99985744520</td>
-						<td>Sedan</td>
-						<td>Hyundai Verna</td>
-						<td>MH12AB3432</td>
-						<td>Y</td>
-						<td><a class="btn btn-primary" href="#" role="button">Update</a></td>
-						<td><a class="btn btn-primary" href="#" role="button">Ride
-								History</a></td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Amit</td>
-						<td>amit@gmail.com</td>
-						<td>9998532950</td>
-						<td>SUV</td>
-						<td>Toyota Innova</td>
-						<td>MH31AB1232</td>
-						<td>Y</td>
-						<td><a class="btn btn-primary" href="#" role="button">Update</a></td>
-						<td><a class="btn btn-primary" href="#" role="button">Ride
+					<tr th:each="driver : ${drivers}">
+						<th scope="row" th:text="${driver['driverId']}"></th>
+						<td th:text="${driver['users']['name']}"></td>
+						<td th:text="${driver['users']['email']}"></td>
+						<td th:text="${driver['users']['contactNo']}"></td>
+						<td th:text="${driver['carType']['carType']}"></td>
+						<td th:text="${driver['carModel']}"></td>
+						<td th:text="${driver['carRegNo']}"></td>
+						<td th:text="${driver['activationStatus']}"></td>
+						<td><a class="btn btn-secondary" th:href="@{'/update-driver/'+${driver['driverId']}}" role="button">Update</a></td>
+						<td><a class="btn btn-info" href="#" role="button">Ride
 								History</a></td>
 					</tr>
 				</tbody>
