@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -15,19 +16,16 @@ public class BookNewRideForm {
 	private Integer carTypeId;
 	
 	@NotNull(message = "Travel hours can not be empty.")
-	private Integer travelhours;
+	private Integer travelHours;
 	
-	@NotNull(message = "Charges can not be empty.")
-	private Integer charges;
-	
-	
+	@Future
+	@NotNull(message="Date & Time can not be empty.")
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-	private Date pickuptime;
+	private Date pickupTime;
 	
 	@NotEmpty(message = "Pickup address can not be empty.")
-	private String pickupaddress;
+	private String pickupAddress;
 	
-	@NotEmpty(message = "Pickup location can not be empty.")
-	private String pickuplocation;
+	private String pickupLocation;
 
 }

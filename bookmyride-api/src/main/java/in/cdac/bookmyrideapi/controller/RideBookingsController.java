@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.cdac.bookmyrideapi.entity.Driver;
 import in.cdac.bookmyrideapi.entity.RideBookings;
 import in.cdac.bookmyrideapi.repositories.RideBookingsDAO;
 
@@ -20,13 +19,13 @@ public class RideBookingsController {
 	@Autowired
 	RideBookingsDAO rideBookingsDao;
 	
-	@GetMapping("/getAllBookings")
+	@GetMapping("/getAllRideBookings")
 	public List<RideBookings> getAllRideBookings() {
 		return rideBookingsDao.findAll();
 	}
-	@PostMapping("/saveNewBooking")
-	public RideBookings saveNewRide(@RequestBody RideBookings ride) {
-		return rideBookingsDao.save(ride);
+	@PostMapping("/saveRideBookings")
+	public RideBookings saveNewRide(@RequestBody RideBookings rideBookings) {
+		return rideBookingsDao.save(rideBookings);
 	}
-	
+
 }
