@@ -3,6 +3,8 @@ package in.cdac.bookmyrideapi.entity;
 
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import in.cdac.bookmyrideapi.enums.BookingStatus;
 import in.cdac.bookmyrideapi.enums.PaymentMethod;
 import in.cdac.bookmyrideapi.enums.PaymentStatus;
@@ -42,7 +44,7 @@ public class RideBookings {
 	private CarType carType;
 	
 	@ManyToOne
-	@JoinColumn(name="DRIVER_ID",nullable=false)
+	@JoinColumn(name="DRIVER_ID",nullable=true)
 	private Driver driver;
 	
 	@Column(name="NO_OF_HOURS")
@@ -60,6 +62,7 @@ public class RideBookings {
 	@Column(name="PICKUP_TIME")
 	private Date pickupTime;
 	
+	@CreationTimestamp
 	@Column(name="BOOKING_TIME")
 	private Date bookingTime;
 	

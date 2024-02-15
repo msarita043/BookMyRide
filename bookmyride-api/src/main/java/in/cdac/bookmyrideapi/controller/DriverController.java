@@ -44,20 +44,6 @@ public class DriverController {
 		return driverDAO.findById(driverId);
 	}
 
-	/*
-	 * @PostMapping("/restaurant/{id}/update") public Restaurant
-	 * updateRestaurant(@PathVariable Long id, @RequestBody Restaurant
-	 * restaurantDetails, BindingResult bindingResult) { Optional<Restaurant>
-	 * restaurantOptional = restaurantService.findById(id);
-	 * 
-	 * if (restaurantOptional.isPresent()) { Restaurant restaurant =
-	 * restaurantOptional.get(); restaurant.setName(restaurantDetails.getName());
-	 * restaurant.setLocation(restaurant.getLocation());
-	 * restaurant.setDescription(restaurantDetails.getDescription());
-	 * logger.info("restaurant information edited successfully"); return
-	 * restaurantService.save(restaurant); } else return null; }
-	 */
-
 	@PostMapping("/updateDriver/{driverId}")
 	public Driver updateDriver(@PathVariable Integer driverId, @RequestBody Driver driver) {
 		Optional<Driver> driverOptional = driverDAO.findById(driverId);

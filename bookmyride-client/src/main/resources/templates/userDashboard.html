@@ -33,52 +33,37 @@
 
 	<div class="container p-3">
 		<div class="d-flex justify-content-center mb-3">
-			<a class="btn btn-primary btn-lg btn-rounded" href="book-new-ride" role="button"><i class="fa-solid fa-car"></i><span class="m-2">Book
-				New Rides</span></a>
+			<a class="btn btn-primary btn-lg btn-rounded" href="book-new-ride"
+				role="button"><i class="fa-solid fa-car"></i><span class="m-2">Book
+					New Rides</span></a>
 		</div>
-
-		<table class="ride-hist table table-striped" >
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Status</th>
-					<th scope="col">Driver Name</th>
-					<th scope="col">Booking Time</th>
-					<th scope="col">Start Time</th>
-					<th scope="col">Duration</th>
-					<th scope="col">Fare</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Upcoming</td>
-					<td>Amit</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Rakesh</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td colspan="2">Larry</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+		<hr class="mb-3 hr hr-blurry">
+		<div class="table-responsive">
+			<table class="table table-borderless table-sm table-hover">
+				<thead>
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Status</th>
+						<th scope="col">Driver Name</th>
+						<th scope="col">Booking Time</th>
+						<th scope="col">Start Time</th>
+						<th scope="col">Duration</th>
+						<th scope="col">Fare</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="rideBooking : ${rideBookings}">
+						<th scope="row" th:text="${rideBooking['rideId']}"></th>
+						<td th:text="${rideBooking['bookingStatus']}"></td>
+						<td
+							th:text="${rideBooking['driver'] !=null ? rideBooking['driver']['users']['name'] : 'NOT ASSIGNED'}"></td>
+						<td th:text="${rideBooking['bookingTime']}"></td>
+						<td th:text="${rideBooking['pickupTime']}"></td>
+						<td th:text="${rideBooking['noOfHours']}"></td>
+						<td th:text="${rideBooking['charges']}"></td>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
