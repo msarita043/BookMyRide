@@ -1,4 +1,4 @@
-package in.cdac.bookmyrideapi.entity;
+	package in.cdac.bookmyrideapi.entity;
 
 
 import in.cdac.bookmyrideapi.enums.ActivationStatus;

@@ -36,101 +36,60 @@
 		</div>
 	</div>
 	<div class="container p-3">
-		<div class="fs-4 m-3"><h4>Enter Driver's Details</h4></div>
+		<div class="fs-4 m-3">Enter New Driver Details</div>
 		<form method="post" action="#" th:action="@{/add-new-driver}"
 			th:object="${addNewDriverForm}">
 			<div class="row row-12 mb-3" style="height: 10vh;">
 				<div class="col col-md-8 col-sm-12">
 					<input type="text" class="form-control rounded-pill" id="name"
-						name="name" placeholder="Enter Name..." />
+						name="name" placeholder="Enter Your Name..." />
 				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-						th:errorclass="text-danger"></p>
-				</div>
+				<div class="col col-md-4 col-sm-12"></div>
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Email address</label> <input
+					type="email" class="form-control" id="email" field="*{email}">
+			</div>
+			<div class="mb-3">
+				<label for="contact" class="form-label">Contact No</label> <input
+					type="text" class="form-control" id="contact" field="*{contact}">
 			</div>
 			<div class="row row-12 mb-3" style="height: 10vh;">
-				<div class="col col-md-8 col-sm-12">
-					<input type="email" class="form-control rounded-pill" id="email"
-						name="email" placeholder="Enter Email...">
+				<div class="col col-md-1 col-sm-12">
+					<label for="cartype" class="form-label">Car Type</label>
 				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-						th:errorclass="text-danger"></p>
-				</div>
-			</div>
-			<div class="row row-12 mb-3" style="height: 10vh;">
-				<div class="col col-md-8 col-sm-12">
-					<input type="text" class="form-control rounded-pill" id="contact"
-						name="contact" placeholder="Enter Contact Number...">
-				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}"
-						th:errorclass="text-danger"></p>
-				</div>
-			</div>
-			<div class="row row-12 mb-3" style="height: 10vh;">
-				<div class="col col-md-8 col-sm-12">
-					<select class="form-control rounded-pill" name="carTypeId"
+				<div class="col col-md-7 col-sm-12">
+					<select class="form-control rounded-pill" name="cartype"
 						id="cartype">
-						<option selected="true" disabled="disabled">Select
-							Car Type</option>
 						<option th:each="cartype : ${cartypes}"
 							th:value="${cartype['carTypeId']}"
 							th:text="${cartype['carType']}"></option>
 					</select>
 				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('carTypeId')}"
-						th:errors="*{carTypeId}" th:errorclass="text-danger"></p>
-				</div>
+				<div class="col col-md-4 col-sm-12"></div>
 			</div>
-			<div class="row row-12 mb-3" style="height: 10vh;">
-				<div class="col col-md-8 col-sm-12">
-					<input type="text" class="form-control rounded-pill" id="carmodel"
-						name="carModel" placeholder="Enter Car Model...">
-				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('carModel')}" th:errors="*{carModel}"
-						th:errorclass="text-danger"></p>
-				</div>
+			<div class="mb-3">
+				<label for="carmodel" class="form-label">Car Model</label> <input
+					type="text" class="form-control" id="carmodel" field="*{carmodel}">
 			</div>
-			<div class="row row-12 mb-3" style="height: 10vh;">
-				<div class="col col-md-8 col-sm-12">
-					<input type="text" class="form-control rounded-pill" id="carRegNo"
-						name="carRegNo" placeholder="Enter Car Registration Number...">
-				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('carRegNo')}" th:errors="*{carRegNo}"
-						th:errorclass="text-danger"></p>
-				</div>
+			<div class="mb-3">
+				<label for="carmodel" class="form-label">Car Number</label> <input
+					type="text" class="form-control" id="carmodel" field="*{carnumber}">
 			</div>
-			<div class="row row-12 mb-3" style="height: 10vh;">
-				<div class="col col-md-8 col-sm-12">
-					<select class="form-control rounded-pill" name="activationStatus"
-						id="activationStatus">
-						<option selected="true" disabled="disabled">Select
-							Activation Status</option>
-						<option value="ACTIVE">ACTIVE</option>
-						<option value="DISABLED">DISABLED</option>
-					</select>
-				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('carRegNo')}" th:errors="*{carRegNo}"
-						th:errorclass="text-danger"></p>
-				</div>
+			<div class="mb-3">
+				<label for="activationStatus" class="form-label">Activation
+					Status</label> <select class="form-control" name="activationStatus"
+					id="activationStatus">
+					<option value="ACTIVE">ACTIVE</option>
+					<option value="DISABLED">DISABLED</option>
+				</select>
 			</div>
-			<div class="row row-12 mb-3" style="height: 10vh;">
-				<div class="col col-md-8 col-sm-12">
-					<input type="password" class="form-control rounded-pill" id="driverPassword"
-						name="driverPassword" placeholder="Set Driver's Password">
-				</div>
-				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('driverPassword')}" th:errors="*{driverPassword}"
-						th:errorclass="text-danger"></p>
-				</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Password</label> <input
+					type="password" class="form-control" id="password"
+					field="*{password}">
 			</div>
-			<button type="submit" class="btn btn-primary btn-rounded btn-lg mb-3">Submit</button>
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 	<script type="text/javascript"
