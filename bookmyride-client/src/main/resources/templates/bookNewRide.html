@@ -34,44 +34,79 @@
 		</div>
 	</div>
 	<div class="container p-3">
-		<form method="post" th:action="@{/book-new-ride}" th:object="${bookNewRideForm}">
-			<div class="mb-3">
-				<label for="Cartype" class="form-label">Car Type</label>
-				<div class="col col-md-7 col-sm-12">
-					<select class="form-control rounded-pill" name="carTypeId"
-						id="cartype">
-						<option th:each="cartype : ${cartypes}"
-							th:value="${cartype['carTypeId']}"
-							th:text="${cartype['carType']}"></option>
-					</select>
-				</div>
+		<form method="post" th:action="@{/book-new-ride}"
+			th:object="${bookNewRideForm}">
+			<div class="row row-12">
+				<div class="col col-md-8">
+					<div class="mb-3">
+						<label for="Cartype" class="form-label">Car Type</label>
+						<div class="col col-md-7 col-sm-12">
+							<select class="form-control rounded-pill" name="carTypeId"
+								id="cartype">
+								<option th:each="cartype : ${cartypes}"
+									th:value="${cartype['carTypeId']}"
+									th:text="${cartype['carType']}"></option>
+							</select>
+						</div>
 
+					</div>
+					<div class="mb-3">
+						<label for="travelhours" class="form-label">Travel Hours</label> <input
+							type="number" class="form-control" id="travelhours"
+							name="travelhours">
+					</div>
+					<div class="mb-3">
+						<label for="charges" class="form-label">Estimated Charges</label>
+					</div>
+					<div class="mb-3">
+						<label for="pickuptime" class="form-label">Pickup Date &
+							Time</label> <input type="datetime-local" class="form-control"
+							id="pickuptime" name="pickuptime">
+					</div>
+					<div class="mb-3">
+						<label for="pickupaddress" class="form-label">Pickup
+							Address</label> <input type="text" class="form-control"
+							id="pickupaddress" name="pickupaddress">
+						<div>Pickup address</div>
+					</div>
+				</div>
+				<div class="col col-md-4>">
+					<label for="pickuplocation" class="form-label">Pickup
+						Location</label> <input type="text" class="form-control mb-3"
+						id="pickuplocation" name="pickuplocation" readonly>
+					<div id='pickupMap'
+						class="h-100 w-100 mb-3 border border-3 border-primary"></div>
+					<button type="submit" class="btn btn-primary">Book</button>
+				</div>
 			</div>
-			<div class="mb-3">
-				<label for="travelhours" class="form-label">Travel Hours</label>
-				<input type="number" class="form-control" id="travelhours" name="travelhours">
-			</div>
-			<div class="mb-3">
-				<label for="charges" class="form-label">Estimated Charges</label>
-			</div>
-			<div class="mb-3">
-				<label for="pickuptime" class="form-label">Pickup Date & Time</label> 
-				<input type="datetime-local" class="form-control" id="pickuptime" name="pickuptime">
-			</div>
-			<div class="mb-3">
-				<label for="pickupaddress" class="form-label">Pickup Address</label>
-				<input type="text" class="form-control" id="pickupaddress" name="pickupaddress">
-				<div>Pickup address </div>
-			</div>
-			<div class="mb-3">
-				<label for="pickuplocation" class="form-label">Pickup Location</label>
-				<input type="text" class="form-control" id="pickuplocation" name="pickuplocation">
-				<div>Pickup location code</div>
-			</div>
-			<button type="submit" class="btn btn-primary">Book</button>
 		</form>
 	</div>
+
+
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+	<script type='text/javascript'>
+		function loadMapScenario() {
+			var map = new Microsoft.Maps.Map(document.getElementById('pickupMap'),
+					{});
+			var Events = Microsoft.Maps.Events;
+			var pushpin = new Microsoft.Maps.Pushpin(
+					map.getCenter(),
+					{
+						icon : 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+						anchor : new Microsoft.Maps.Point(12, 39),
+						draggable : true
+					});
+			map.entities.push(pushpin);
+			document.getElementById("pickuplocation").value = pushpin.geometry.x+","+pushpin.geometry.y;
+			Events.addHandler(pushpin, 'drag', function () { updateCordinate(pushpin); });
+		}
+		function updateCordinate(pushpin){
+			document.getElementById("pickuplocation").value = pushpin.geometry.x+","+pushpin.geometry.y;
+		}
+	</script>
+	<script type='text/javascript'
+		src='https://www.bing.com/api/maps/mapcontrol?key=ApjcifpEgTYoHT-PuI8X1tW-YXLwIOK2txWznCELaK2VZ9TF36U_DK0ioHdk0JAA&callback=loadMapScenario'
+		async defer></script>
 </body>
 </html>
