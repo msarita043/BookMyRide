@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.cdac.bookmyrideapi.entity.Driver;
+import in.cdac.bookmyrideapi.entity.Users;
 import in.cdac.bookmyrideapi.repositories.DriverDAO;
 
 @RestController
