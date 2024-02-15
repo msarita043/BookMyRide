@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import in.cdac.bookmyrideclient.enums.Roles;
 import in.cdac.bookmyrideclient.model.AddNewDriverForm;
+import in.cdac.bookmyrideclient.model.BookNewRideForm;
 import in.cdac.bookmyrideclient.model.UserLoginForm;
 import in.cdac.bookmyrideclient.model.UserSignUpForm;
 import in.cdac.bookmyrideclient.model.Users;
@@ -46,6 +47,7 @@ public class UsersService {
 		
 		return u;
 	}
+	
 
 	public Users addNewUser(Users user) {
 		return webClient.post().uri("/users/saveUsers").bodyValue(user).retrieve().bodyToMono(Users.class).block();
