@@ -26,7 +26,7 @@ public class BookNewRideController {
 
 	@Autowired
 	CarTypeService carTypeService;
-	
+
 	@Autowired
 	RideBookingsService rideBookingsService;
 
@@ -48,7 +48,8 @@ public class BookNewRideController {
 	}
 
 	@PostMapping("/book-new-ride")
-	public String bookNewRide(@Valid @ModelAttribute("bookNewRideForm") BookNewRideForm bookNewRideForm, BindingResult validationErrorResult,HttpSession httpSession, Model model) {
+	public String bookNewRide(@Valid @ModelAttribute("bookNewRideForm") BookNewRideForm bookNewRideForm,
+			BindingResult validationErrorResult, HttpSession httpSession, Model model) {
 
 		List<CarType> carTypeList = carTypeService.getAllCarTypes();
 		model.addAttribute("cartypes", carTypeList);
@@ -57,13 +58,17 @@ public class BookNewRideController {
 		} else {
 			Users users = (Users) httpSession.getAttribute("user");
 			RideBookings r = rideBookingsService.getRideBookings(bookNewRideForm, users);
-			
+
 			RideBookings newRideBooking = rideBookingsService.addNewRideBooking(r);
 
-			return "userDashboard";
+			if (newRideBooking.getRideId() != null) {
+				return "redirect:/user-dashboard";
+			} else {
+				validationErrorResult.rejectValue("name", "error.bookNewRideForm", "There is some error!");
+			}
+			return "bookNewRide";
 
 		}
 	}
-
 
 }
