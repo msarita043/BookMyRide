@@ -45,6 +45,7 @@
 						<th scope="col">ID</th>
 						<th scope="col">Status</th>
 						<th scope="col">Driver Name</th>
+						<th scope="col">Pickup Address</th>
 						<th scope="col">Booking Time</th>
 						<th scope="col">Start Time</th>
 						<th scope="col">Duration</th>
@@ -55,8 +56,8 @@
 					<tr th:each="rideBooking : ${rideBookings}">
 						<th scope="row" th:text="${rideBooking['rideId']}"></th>
 						<td th:text="${rideBooking['bookingStatus']}"></td>
-						<td
-							th:text="${rideBooking['driver'] !=null ? rideBooking['driver']['users']['name'] : 'NOT ASSIGNED'}"></td>
+						<td th:text="${rideBooking['driver'] !=null ? rideBooking['driver']['users']['name'] : 'NOT ASSIGNED'}"></td>
+						<td th:text="${rideBooking['pickupAddress']}"></td>
 						<td th:text="${rideBooking['bookingTime']}"></td>
 						<td th:text="${rideBooking['pickupTime']}"></td>
 						<td th:text="${rideBooking['noOfHours']}"></td>
