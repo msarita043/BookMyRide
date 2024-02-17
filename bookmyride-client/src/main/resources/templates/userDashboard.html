@@ -38,25 +38,89 @@
 					New Rides</span></a>
 		</div>
 		<hr class="mb-3 hr hr-blurry">
+		<div class="fs-4 m-3">
+			<h4>Upcoming Rides</h4>
+		</div>
+		<div class="d-flex align-content-start flex-wrap mb-5">
+			<div class="card m-3" style="width: 18rem;"
+				th:each="rideBooking : ${upcomingRides}">
+				<div class="card-body">
+					<div class="card-header">
+						<h5 class="card-title text-success"
+							th:if="${rideBooking['bookingStatus'].name() == 'CONFIRMED'}"
+							th:text="${rideBooking['bookingStatus']}"></h5>
+						<h5 class="card-title text-info"
+							th:if="${rideBooking['bookingStatus'].name() == 'PENDING'}"
+							th:text="${rideBooking['bookingStatus']}"></h5>
+						<h5 class="card-title text-danger"
+							th:if="${rideBooking['bookingStatus'].name() == 'CANCELLED'}"
+							th:text="${rideBooking['bookingStatus']}"></h5>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">
+							<p>
+								<span>Driver : </span> <span class="card-text"
+									th:text="${rideBooking['driver'] !=null ? rideBooking['driver']['users']['name'] : 'Not assigned.'}">
+								</span>
+							</p>
+							<p class="card-text" th:if="${rideBooking['driver'] !=null}"
+								th:text="${rideBooking['driver'] !=null ? rideBooking['driver']['users']['contactNo'] : ''}">
+							</p>
+						</li>
+						<li class="list-group-item">
+							<p>
+								<span>Pickup Time : </span> <span class="card-text"
+									th:text="${rideBooking['pickupTime']}"></span>
+							</p>
+						</li>
+						<li class="list-group-item">
+							<p class="card-text" th:text="${rideBooking['pickupAddress']}"></p>
+						</li>
+						<li class="list-group-item">
+							<p>
+								<span>Travel Hours : </span> <span class="card-text"
+									th:text="${rideBooking['noOfHours']}"></span>
+							</p>
+						</li>
+						<li class="list-group-item">
+							<p>
+								<span>Fare : </span><span class="card-text"
+									th:text="${rideBooking['charges']}"></span><span> Rs.</span>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="fs-4 m-3">
+			<h4>Previous Rides</h4>
+		</div>
 		<div class="table-responsive">
 			<table class="table table-borderless table-sm table-hover">
 				<thead>
 					<tr>
-						<th scope="col">ID</th>
 						<th scope="col">Status</th>
 						<th scope="col">Driver Name</th>
 						<th scope="col">Pickup Address</th>
 						<th scope="col">Booking Time</th>
 						<th scope="col">Start Time</th>
-						<th scope="col">Duration</th>
+						<th scope="col">Travel Hours</th>
 						<th scope="col">Fare</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="rideBooking : ${rideBookings}">
-						<th scope="row" th:text="${rideBooking['rideId']}"></th>
-						<td th:text="${rideBooking['bookingStatus']}"></td>
-						<td th:text="${rideBooking['driver'] !=null ? rideBooking['driver']['users']['name'] : 'NOT ASSIGNED'}"></td>
+					<tr th:each="rideBooking : ${previousRides}">
+						<td scope="row" class="text-success"
+							th:if="${rideBooking['bookingStatus'].name() == 'CONFIRMED'}"
+							th:text="${rideBooking['bookingStatus']}"></td>
+						<td scope="row" class="text-info"
+							th:if="${rideBooking['bookingStatus'].name() == 'PENDING'}"
+							th:text="${rideBooking['bookingStatus']}"></td>
+						<td scope="row" class="text-danger"
+							th:if="${rideBooking['bookingStatus'].name() == 'CANCELLED'}"
+							th:text="${rideBooking['bookingStatus']}"></td>
+						<td
+							th:text="${rideBooking['driver'] !=null ? rideBooking['driver']['users']['name'] : 'NOT ASSIGNED'}"></td>
 						<td th:text="${rideBooking['pickupAddress']}"></td>
 						<td th:text="${rideBooking['bookingTime']}"></td>
 						<td th:text="${rideBooking['pickupTime']}"></td>

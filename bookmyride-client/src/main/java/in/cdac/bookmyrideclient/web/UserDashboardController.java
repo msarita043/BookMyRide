@@ -29,9 +29,10 @@ public class UserDashboardController {
 			httpSession.invalidate();
 			return "redirect:/";
 		}
-
-		List<RideBookings> rideBooking = rideBookingsService.getAllRideBookings();
-		model.addAttribute("rideBookings", rideBooking);
+		List<RideBookings> upcomingRides = rideBookingsService.getUpcomingRidesByUser(users.getUserId());
+		model.addAttribute("upcomingRides", upcomingRides);
+		List<RideBookings> previousRides = rideBookingsService.getPreviousRidesByUser(users.getUserId());
+		model.addAttribute("previousRides", previousRides);
 		return "userDashboard";
 	}
 
