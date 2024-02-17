@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import in.cdac.bookmyrideclient.enums.Roles;
 import in.cdac.bookmyrideclient.model.BookNewRideForm;
 import in.cdac.bookmyrideclient.model.CarType;
-import in.cdac.bookmyrideclient.model.Driver;
 import in.cdac.bookmyrideclient.model.RideBookings;
 import in.cdac.bookmyrideclient.model.Users;
 import in.cdac.bookmyrideclient.service.CarTypeService;

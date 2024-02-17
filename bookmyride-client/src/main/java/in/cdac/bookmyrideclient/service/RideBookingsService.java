@@ -13,7 +13,6 @@ import in.cdac.bookmyrideclient.enums.PaymentMethod;
 import in.cdac.bookmyrideclient.enums.PaymentStatus;
 import in.cdac.bookmyrideclient.model.BookNewRideForm;
 import in.cdac.bookmyrideclient.model.CarType;
-import in.cdac.bookmyrideclient.model.Driver;
 import in.cdac.bookmyrideclient.model.RideBookings;
 import in.cdac.bookmyrideclient.model.Users;
 
@@ -51,6 +50,18 @@ public class RideBookingsService {
 
 	public List<RideBookings> getAllRideBookings() {
 		return webClient.get().uri("/rideBookings/getAllRideBookings").retrieve()
+				.bodyToMono(new ParameterizedTypeReference<List<RideBookings>>() {
+				}).block();
+	}
+	
+	public List<RideBookings> getUpcomingRidesByUser(Integer userId) {
+		return webClient.post().uri("/rideBookings/getUpcomingRidesByUser/"+userId).retrieve()
+				.bodyToMono(new ParameterizedTypeReference<List<RideBookings>>() {
+				}).block();
+	}
+	
+	public List<RideBookings> getPreviousRidesByUser(Integer userId) {
+		return webClient.post().uri("/rideBookings/getPreviousRidesByUser/"+userId).retrieve()
 				.bodyToMono(new ParameterizedTypeReference<List<RideBookings>>() {
 				}).block();
 	}
