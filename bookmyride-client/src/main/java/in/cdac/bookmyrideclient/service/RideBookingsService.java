@@ -97,5 +97,11 @@ public class RideBookingsService {
 				.bodyToMono(new ParameterizedTypeReference<Map<String, String>>() {
 				}).block();
 	}
+	
+	public List<RideBookings> getPreviousRidesByDriver(Integer driverId) {
+		return webClient.post().uri("/rideBookings/getPreviousRidesByDriver/" + driverId).retrieve()
+				.bodyToMono(new ParameterizedTypeReference<List<RideBookings>>() {
+				}).block();
+	}
 
 }

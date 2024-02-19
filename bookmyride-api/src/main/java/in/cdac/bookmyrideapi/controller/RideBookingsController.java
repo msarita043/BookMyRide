@@ -61,7 +61,8 @@ public class RideBookingsController {
 	}
 
 	@PostMapping("/getAllUpcomingRidesByCarTypeId/{carTypeId}")
-	public List<RideBookings> getAllUpcomingRidesByCarTypeId(@PathVariable Integer carTypeId, @RequestBody Driver driver) {
+	public List<RideBookings> getAllUpcomingRidesByCarTypeId(@PathVariable Integer carTypeId,
+			@RequestBody Driver driver) {
 		List<RideBookings> result = new ArrayList<RideBookings>();
 		List<DeclinedRides> declinedRides = declinedRidesDAO.findByDriverId(driver.getDriverId());
 		List<Integer> declinedRideIds = new ArrayList<Integer>();
@@ -70,7 +71,7 @@ public class RideBookingsController {
 		}
 		List<RideBookings> rides = rideBookingsDao.findAllUpcomingRidesByCarTypeId(carTypeId, new Date());
 		for (RideBookings rideBookings : rides) {
-			if(!declinedRideIds.contains(rideBookings.getRideId())) {
+			if (!declinedRideIds.contains(rideBookings.getRideId())) {
 				result.add(rideBookings);
 			}
 		}
@@ -110,7 +111,7 @@ public class RideBookingsController {
 	public List<RideBookings> getAllUpcomingRides(@PathVariable Integer driverId) {
 		return rideBookingsDao.getAllUpcomingRides(driverId, new Date());
 	}
-	
+
 	@PostMapping("/cancelRide/{rideId}")
 	public Map<String, String> cancelRide(@PathVariable Integer rideId) {
 		Map<String, String> res = new HashMap<String, String>();
@@ -122,7 +123,10 @@ public class RideBookingsController {
 		res.put("message", "Ride cancelled.");
 		return res;
 	}
-	
-	
-	
+
+	@PostMapping("/getPreviousRidesByDriver/{driverId}")
+	public List<RideBookings> getPreviousRidesByDriver(@PathVariable Integer driverId) {
+		return rideBookingsDao.findPreviousRidesByDriver(driverId, new Date());
+	}
+
 }
