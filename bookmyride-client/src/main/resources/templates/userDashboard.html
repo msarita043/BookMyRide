@@ -74,7 +74,10 @@
 							</p>
 						</li>
 						<li class="list-group-item">
-							<p class="card-text" th:text="${rideBooking['pickupAddress']}"></p>
+							<p>
+								<span>Pickup Address : </span> <span class="card-text"
+									th:text="${rideBooking['pickupAddress']}"> </span>
+							</p>
 						</li>
 						<li class="list-group-item">
 							<p>
@@ -89,6 +92,12 @@
 							</p>
 						</li>
 					</ul>
+					<div class="d-flex justify-content-center "
+						th:if="${rideBooking['bookingStatus'].name() == 'CONFIRMED'|| rideBooking['bookingStatus'].name() =='PENDING'}">
+						<button type="button" class="btn btn-danger col m-3 cancelRide"
+							th:attr="data-rideId=${rideBooking['rideId']}">CANCEL
+							RIDE</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -132,5 +141,39 @@
 	</div>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+	<script type='text/javascript'>
+		var cancelRide = document.getElementsByClassName("cancelRide");
+		for (var i = 0; i < cancelRide.length; i++) {
+			cancelRide[i].addEventListener("click", function() {
+				console.log(this);
+			 let rideId = this.getAttribute('data-rideid');
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				var raw = JSON.stringify({
+					"rideId":rideId
+				});
+				var requestOptions = {
+				  method: 'POST',
+				  headers: myHeaders,
+				  body: raw,
+				  redirect: 'follow'
+				};
+				fetch("/canceleRide", requestOptions)
+				  .then(response => response.text())
+				  .then(result => {
+					  let res = JSON.parse(result);
+					  this.remove();
+					  alert(res.message);
+				  })
+				  .catch(error => console.log('error', error)); 
+				let headElement = this.closest(".card-body")
+						.querySelector("h5");
+				headElement.innerHTML = "CANCELLED";
+				headElement.classList.remove("text-success");
+				headElement.classList.remove("text-info");
+				headElement.classList.add("text-danger");
+			});
+		}
+	</script>
 </body>
 </html>

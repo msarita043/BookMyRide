@@ -58,4 +58,9 @@ public class DriverController {
 		} else
 			return null;
 	}
+	
+	@GetMapping("/getDriverByUserId/{userId}")
+	public Driver getDriverByUser(@PathVariable Integer userId) {
+		return driverDAO.findByUserId(userId);
+	}
 }
