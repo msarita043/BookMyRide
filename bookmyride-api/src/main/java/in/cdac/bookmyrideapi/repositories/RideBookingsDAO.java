@@ -20,11 +20,11 @@ public interface RideBookingsDAO extends JpaRepository<RideBookings, Integer> {
 
 	@Query("FROM RideBookings WHERE carType.carTypeId = :carTypeId AND pickupTime >= :currentDateTime AND bookingStatus = 'PENDING'")
 	List<RideBookings> findAllUpcomingRidesByCarTypeId(Integer carTypeId, Date currentDateTime);
-	
+
 	@Query("FROM RideBookings WHERE driver.driverId = :driverId AND pickupTime >= :currentDateTime AND bookingStatus = 'CONFIRMED'")
 	List<RideBookings> getAllUpcomingRides(Integer driverId, Date currentDateTime);
 
-	
+	@Query("FROM RideBookings WHERE driver.driverId = :driverId AND pickupTime < :currentDateTime")
+	List<RideBookings> findPreviousRidesByDriver(Integer driverId, Date currentDateTime);
 
-	
 }

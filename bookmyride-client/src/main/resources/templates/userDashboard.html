@@ -101,6 +101,7 @@
 				</div>
 			</div>
 		</div>
+		<hr class="mb-3 hr hr-blurry">
 		<div class="fs-4 m-3">
 			<h4>Previous Rides</h4>
 		</div>
@@ -112,7 +113,7 @@
 						<th scope="col">Driver Name</th>
 						<th scope="col">Pickup Address</th>
 						<th scope="col">Booking Time</th>
-						<th scope="col">Start Time</th>
+						<th scope="col">Pickup Time</th>
 						<th scope="col">Travel Hours</th>
 						<th scope="col">Fare</th>
 					</tr>
@@ -158,7 +159,7 @@
 				  body: raw,
 				  redirect: 'follow'
 				};
-				fetch("/canceleRide", requestOptions)
+				fetch("/cancelRide", requestOptions)
 				  .then(response => response.text())
 				  .then(result => {
 					  let res = JSON.parse(result);
