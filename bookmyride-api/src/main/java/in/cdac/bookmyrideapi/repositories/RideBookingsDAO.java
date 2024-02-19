@@ -12,10 +12,19 @@ import in.cdac.bookmyrideapi.entity.RideBookings;
 @Repository
 public interface RideBookingsDAO extends JpaRepository<RideBookings, Integer> {
 
-	@Query("SELECT r FROM RideBookings r WHERE r.users.userId = :userId and r.pickupTime >= :currentDateTime ORDER BY r.pickupTime")
+	@Query("SELECT r FROM RideBookings r WHERE r.users.userId = :userId AND r.pickupTime >= :currentDateTime ORDER BY r.pickupTime")
 	List<RideBookings> findUpcomingRidesByUser(Integer userId, Date currentDateTime);
 
-	@Query("from RideBookings WHERE users.userId = :userId and pickupTime < :currentDateTime")
+	@Query("FROM RideBookings WHERE users.userId = :userId AND pickupTime < :currentDateTime")
 	List<RideBookings> findPreviousRidesByUser(Integer userId, Date currentDateTime);
 
+	@Query("FROM RideBookings WHERE carType.carTypeId = :carTypeId AND pickupTime >= :currentDateTime AND bookingStatus = 'PENDING'")
+	List<RideBookings> findAllUpcomingRidesByCarTypeId(Integer carTypeId, Date currentDateTime);
+	
+	@Query("FROM RideBookings WHERE driver.driverId = :driverId AND pickupTime >= :currentDateTime AND bookingStatus = 'CONFIRMED'")
+	List<RideBookings> getAllUpcomingRides(Integer driverId, Date currentDateTime);
+
+	
+
+	
 }

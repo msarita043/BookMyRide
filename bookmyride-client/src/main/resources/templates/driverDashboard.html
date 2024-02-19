@@ -32,109 +32,114 @@
 	</div>
 
 	<div class="container p-3">
-		<div class="mb-3">
+		<div class="d-flex justify-content-center mb-3">
 			<a class="btn btn-primary btn-lg btn-rounded"
 				href="driver-ride-history" role="button"><i
 				class="fa-solid fa-car"></i><span class="m-2">Previous Rides
 					History</span></a>
 		</div>
+		<hr class="mb-3 hr hr-blurry">
 
-		<div>
-			<div class="accordion" id="accordionPanelsStayOpenExample">
-				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button" type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-							aria-controls="panelsStayOpen-collapseOne">Current
-							Request #1</button>
-					</h2>
-					<div id="panelsStayOpen-collapseOne"
-						class="accordion-collapse collapse show">
-						<div class="accordion-body">
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">Ride Details</h5>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Rider
-										Name :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Car
-										Type :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Ride
-										Hours :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Pickup
-										Time :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Pickup
-										Location :</h6>
-									<button type="button" class="btn btn-success">Accept</button>
-									<button type="button" class="btn btn-danger">Decline</button>
-								</div>
+		<div class="fs-4 m-3">
+			<h4>Current Ride Requests</h4>
+		</div>
+		<div class="d-flex align-content-start flex-wrap mb-5">
+			<div class="card m-3 w-100"
+				th:each="rideBooking : ${currentRequests}">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${rideBooking['users']['name']}"></h5>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<p>
+										<span>Contact No : </span> <span class="card-text"
+											th:text="${rideBooking['users']['contactNo']}"></span>
+									</p>
+								</li>
+								<li class="list-group-item">
+									<p>
+										<span>Pickup Time : </span> <span class="card-text"
+											th:text="${rideBooking['pickupTime']}"></span>
+									</p>
+								</li>
+								<li class="list-group-item"><p>
+										<span>Pickup Address : </span> <span class="card-text"
+											th:text="${rideBooking['pickupAddress']}"> </span>
+									</p></li>
+								<li class="list-group-item">
+									<p>
+										<span>Travel Hours : </span> <span class="card-text"
+											th:text="${rideBooking['noOfHours']}"></span>
+									</p>
+								</li>
+								<li class="list-group-item">
+									<p>
+										<span>Fare : </span><span class="card-text"
+											th:text="${rideBooking['charges']}"></span><span> Rs.</span>
+									</p>
+								</li>
+							</ul>
+							<div class="row">
+								<button type="button" class="btn btn-success rounded-pill col m-3 acceptRide"
+									th:attr="data-rideId=${rideBooking['rideId']},data-userId=${session.user['userId']}">Accept</button>
+								<button type="button" class="btn btn-danger rounded-pill col m-3 declineRide"
+									th:attr="data-rideid=${rideBooking['rideId']},data-userid=${session.user['userId']}">Decline</button>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#panelsStayOpen-collapseTwo"
-							aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">Current
-							Request #2</button>
-					</h2>
-					<div id="panelsStayOpen-collapseTwo"
-						class="accordion-collapse collapse">
-						<div class="accordion-body">
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">Ride Details</h5>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Rider
-										Name :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Car
-										Type :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Ride
-										Hours :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Pickup
-										Time :</h6>
-									<h6 class="card-subtitle mb-2 text-body-secondary">Pickup
-										Location :</h6>
-									<button type="button" class="btn btn-success">Accept</button>
-									<button type="button" class="btn btn-danger">Decline</button>
-								</div>
-							</div>
-						</div>
+					<div class="col-md-4">
+						<div th:id="'map'+${rideBooking['rideId']}"
+							th:attr="data-cord=${rideBooking['pickupLocation']}" class="maps"></div>
 					</div>
 				</div>
-
-				<div class="accordion-item">
-					<h2 class="accordion-header">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#panelsStayOpen-collapseThree"
-							aria-expanded="false"
-							aria-controls="panelsStayOpen-collapseThree">Current
-							Request #3</button>
-					</h2>
-					<div id="panelsStayOpen-collapseThree"
-						class="accordion-collapse collapse">
-						<div class="accordion-body">
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">
-										Ride Details/h5>
-										<h6 class="card-subtitle mb-2 text-body-secondary">Rider
-											Name :</h6>
-										<h6 class="card-subtitle mb-2 text-body-secondary">Car
-											Type :</h6>
-										<h6 class="card-subtitle mb-2 text-body-secondary">Ride
-											Hours :</h6>
-										<h6 class="card-subtitle mb-2 text-body-secondary">Pickup
-											Time :</h6>
-										<h6 class="card-subtitle mb-2 text-body-secondary">Pickup
-											Location :</h6>
-										<button type="button" class="btn btn-success">Accept</button>
-										<button type="button" class="btn btn-danger">Decline</button>
-								</div>
-							</div>
+			</div>
+		</div>
+		<div class="fs-4 m-3">
+			<h4>Upcoming Rides</h4>
+		</div>
+		<div class="d-flex align-content-start flex-wrap mb-5">
+			<div class="card m-3 w-100"
+				th:each="rideBooking : ${upcomingRides}">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${rideBooking['users']['name']}"></h5>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<p>
+										<span>Contact No : </span> <span class="card-text"
+											th:text="${rideBooking['users']['contactNo']}"></span>
+									</p>
+								</li>
+								<li class="list-group-item">
+									<p>
+										<span>Pickup Time : </span> <span class="card-text"
+											th:text="${rideBooking['pickupTime']}"></span>
+									</p>
+								</li>
+								<li class="list-group-item"><p>
+										<span>Pickup Address : </span> <span class="card-text"
+											th:text="${rideBooking['pickupAddress']}"> </span>
+									</p></li>
+								<li class="list-group-item">
+									<p>
+										<span>Travel Hours : </span> <span class="card-text"
+											th:text="${rideBooking['noOfHours']}"></span>
+									</p>
+								</li>
+								<li class="list-group-item">
+									<p>
+										<span>Fare : </span><span class="card-text"
+											th:text="${rideBooking['charges']}"></span><span> Rs.</span>
+									</p>
+								</li>
+							</ul>
 						</div>
+					</div>
+					<div class="col-md-4">
+						<div th:id="'map'+${rideBooking['rideId']}"
+							th:attr="data-cord=${rideBooking['pickupLocation']}" class="maps"></div>
 					</div>
 				</div>
 			</div>
@@ -142,5 +147,93 @@
 	</div>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+	<script type='text/javascript'>
+		function loadMapScenario() {
+			var maps = document.getElementsByClassName("maps");
+			for (var i = 0; i < maps.length; i++) {
+				console.log(maps[i].id);
+				console.log(maps[i].getAttribute('data-cord'));
+				const cordinateString = maps[i].getAttribute('data-cord');
+				const cordinateArray = cordinateString.split(",");
+				const xCord = parseFloat(cordinateArray[0]);
+				console.log(xCord);
+				const yCord = parseFloat(cordinateArray[1]);
+				console.log(yCord);
+				var map = new Microsoft.Maps.Map(document
+						.getElementById(maps[i].id), {
+					center : new Microsoft.Maps.Location(yCord, xCord)
+				});
+				var pushpin = new Microsoft.Maps.Pushpin(
+						map.getCenter(),
+						{
+							icon : 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+							anchor : new Microsoft.Maps.Point(12, 39),
+							draggable : false
+						});
+				map.entities.push(pushpin);
+			}
+		}
+		var acceptRide = document.getElementsByClassName("acceptRide");
+		for (var i = 0; i < acceptRide.length; i++) {
+			acceptRide[i].addEventListener("click", function() {
+				console.log(this);
+				let userId = this.getAttribute('data-userid');
+				let rideId = this.getAttribute('data-rideid');
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				var raw = JSON.stringify({
+					"userId":userId,
+					"rideId":rideId
+				});
+				var requestOptions = {
+				  method: 'POST',
+				  headers: myHeaders,
+				  body: raw,
+				  redirect: 'follow'
+				};
+				fetch("/acceptRide", requestOptions)
+				  .then(response => response.text())
+				  .then(result => {
+					  let res = JSON.parse(result);
+					  this.closest(".card").remove();
+					  alert(res.message);
+					  
+				  })
+				  .catch(error => console.log('error', error));
+			});
+		}
+		var declineRide = document.getElementsByClassName("declineRide");
+		for (var i = 0; i < declineRide.length; i++) {
+			declineRide[i].addEventListener("click", function() {
+				console.log(this);
+				let userId = this.getAttribute('data-userid');
+				let rideId = this.getAttribute('data-rideid');
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				var raw = JSON.stringify({
+					"userId":userId,
+					"rideId":rideId
+				});
+				var requestOptions = {
+				  method: 'POST',
+				  headers: myHeaders,
+				  body: raw,
+				  redirect: 'follow'
+				};
+				fetch("/declineRide", requestOptions)
+				  .then(response => response.text())
+				  .then(result => {
+					  let res = JSON.parse(result);
+					  this.closest(".card").remove();
+					  alert(res.message);
+					  
+				  })
+				  .catch(error => console.log('error', error));
+			});
+		}
+	</script>
+	<script type='text/javascript'
+		src='https://www.bing.com/api/maps/mapcontrol?key=ApjcifpEgTYoHT-PuI8X1tW-YXLwIOK2txWznCELaK2VZ9TF36U_DK0ioHdk0JAA&callback=loadMapScenario'
+		async defer></script>
 </body>
 </html>

@@ -34,7 +34,7 @@ public class DriverService {
 		d.setActivationStatus(addNewDriverForm.getActivationStatus());
 		return d;
 	}
-	
+
 	public Driver getDriver(UpdateDriverForm updateDriverForm, Users users) {
 		Driver d = new Driver();
 		d.setUsers(users);
@@ -50,12 +50,12 @@ public class DriverService {
 		return webClient.post().uri("/driver/saveDrivers").bodyValue(driver).retrieve().bodyToMono(Driver.class)
 				.block();
 	}
-	
+
 	public Driver updateDriver(Driver driver, Integer driverId) {
-		return webClient.post().uri("/driver/updateDriver/"+driverId).bodyValue(driver).retrieve().bodyToMono(Driver.class)
-				.block();
+		return webClient.post().uri("/driver/updateDriver/" + driverId).bodyValue(driver).retrieve()
+				.bodyToMono(Driver.class).block();
 	}
-	
+
 	public List<Driver> getAllDrivers() {
 		return webClient.get().uri("/driver/getAllDrivers").retrieve()
 				.bodyToMono(new ParameterizedTypeReference<List<Driver>>() {
@@ -63,10 +63,13 @@ public class DriverService {
 	}
 
 	public Optional<Driver> getDriver(Integer driverId) {
-		return webClient.get().uri("/driver/getDriver/"+driverId).retrieve().bodyToMono(new ParameterizedTypeReference<Optional<Driver>>() {
-		}).block();
+		return webClient.get().uri("/driver/getDriver/" + driverId).retrieve()
+				.bodyToMono(new ParameterizedTypeReference<Optional<Driver>>() {
+				}).block();
 	}
-	
-	
+
+	public Driver getDriverByUserId(Integer userId) {
+		return webClient.get().uri("/driver/getDriverByUserId/" + userId).retrieve().bodyToMono(Driver.class).block();
+	}
 
 }
