@@ -26,6 +26,9 @@
 			<span class="fs-4 fw-medium">Welcome </span><span class="fs-4"
 				th:text="${session.user['name']}"></span>
 		</p>
+		<div class="fs-1 fw-bolder text-light text-center">
+			<i class="fa-solid fa-car m-3"></i>Book My Ride
+		</div>
 		<div class="m-3">
 			<a type="button" class="btn btn-secondary btn-rounded"
 				th:href="@{/admin-dashboard}"> <i class="fa-solid fa-arrow-left"></i>
@@ -36,7 +39,9 @@
 		</div>
 	</div>
 	<div class="container p-3">
-		<div class="fs-4 m-3"><h4>Enter Driver's Details</h4></div>
+		<div class="fs-4 m-3">
+			<h4>Enter Driver's Details</h4>
+		</div>
 		<form method="post" action="#" th:action="@{/add-new-driver}"
 			th:object="${addNewDriverForm}">
 			<div class="row row-12 mb-3" style="height: 10vh;">
@@ -73,8 +78,8 @@
 				<div class="col col-md-8 col-sm-12">
 					<select class="form-control rounded-pill" name="carTypeId"
 						id="cartype">
-						<option selected="true" disabled="disabled">Select
-							Car Type</option>
+						<option selected="true" disabled="disabled">Select Car
+							Type</option>
 						<option th:each="cartype : ${cartypes}"
 							th:value="${cartype['carTypeId']}"
 							th:text="${cartype['carType']}"></option>
@@ -122,12 +127,13 @@
 			</div>
 			<div class="row row-12 mb-3" style="height: 10vh;">
 				<div class="col col-md-8 col-sm-12">
-					<input type="password" class="form-control rounded-pill" id="driverPassword"
-						name="driverPassword" placeholder="Set Driver's Password">
+					<input type="password" class="form-control rounded-pill"
+						id="driverPassword" name="driverPassword"
+						placeholder="Set Driver's Password">
 				</div>
 				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('driverPassword')}" th:errors="*{driverPassword}"
-						th:errorclass="text-danger"></p>
+					<p th:if="${#fields.hasErrors('driverPassword')}"
+						th:errors="*{driverPassword}" th:errorclass="text-danger"></p>
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary btn-rounded btn-lg mb-3">Submit</button>

@@ -25,6 +25,9 @@
 			<span class="fs-4 fw-medium">Welcome </span><span class="fs-4"
 				th:text="${session.user['name']}"></span>
 		</p>
+		<div class="fs-1 fw-bolder text-light text-center">
+			<i class="fa-solid fa-car m-3"></i>Book My Ride
+		</div>
 		<div class="m-3">
 			<a type="button" class="btn btn-danger btn-rounded"
 				th:href="@{/logout}">Log Out</a>
@@ -116,6 +119,8 @@
 						<th scope="col">Pickup Time</th>
 						<th scope="col">Travel Hours</th>
 						<th scope="col">Fare</th>
+						<th scope="col">Payment Status</th>
+						<th scope="col">Payment Method</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -135,7 +140,12 @@
 						<td th:text="${rideBooking['bookingTime']}"></td>
 						<td th:text="${rideBooking['pickupTime']}"></td>
 						<td th:text="${rideBooking['noOfHours']}"></td>
-						<td th:text="${rideBooking['charges']}"></td>
+						<td
+							th:if="${rideBooking['bookingStatus'].name() == 'CANCELLED'|| rideBooking['bookingStatus'].name() =='PENDING'}">0</td>
+						<td th:if="${rideBooking['bookingStatus'].name() =='CONFIRMED'}"
+							th:text="${rideBooking['charges']}"></td>
+						<td th:text="${rideBooking['paymentStatus']}"></td>
+						<td th:text="${rideBooking['paymentMethod']}"></td>
 				</tbody>
 			</table>
 		</div>

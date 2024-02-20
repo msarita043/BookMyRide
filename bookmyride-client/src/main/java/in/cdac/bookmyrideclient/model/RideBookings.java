@@ -40,4 +40,6 @@ public class RideBookings {
 	private PaymentStatus paymentStatus;
 	
 	private PaymentMethod paymentMethod; 
+	
+	private Date updatePaymentBefore;
 }

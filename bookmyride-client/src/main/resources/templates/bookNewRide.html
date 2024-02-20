@@ -25,6 +25,9 @@
 			<span class="fs-4 fw-medium">Welcome </span><span class="fs-4"
 				th:text="${session.user['name']}"></span>
 		</p>
+		<div class="fs-1 fw-bolder text-light text-center">
+			<i class="fa-solid fa-car m-3"></i>Book My Ride
+		</div>
 		<div class="m-3">
 			<a type="button" class="btn btn-secondary btn-rounded"
 				th:href="@{/user-dashboard}"> <i class="fa-solid fa-arrow-left"></i>
@@ -63,8 +66,8 @@
 									id="travelHours" name="travelHours"
 									placeholder="Enter travel hours..." onchange="calcCharges()">
 								<span class="input-group-text bg-primary-subtle">Estimated
-									Charges</span>
-								<input type="number" class="form-control rounded-end-pill" id="estimatedCharges"
+									Charges</span> <input type="number"
+									class="form-control rounded-end-pill" id="estimatedCharges"
 									name="estimatedCharges" readonly>
 							</div>
 						</div>

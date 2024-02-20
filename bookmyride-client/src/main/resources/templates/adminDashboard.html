@@ -25,6 +25,9 @@
 			<span class="fs-4 fw-medium">Welcome </span><span class="fs-4"
 				th:text="${session.user['name']}"></span>
 		</p>
+		<div class="fs-1 fw-bolder text-light text-center">
+			<i class="fa-solid fa-car m-3"></i>Book My Ride
+		</div>
 		<div class="m-3">
 			<a type="button" class="btn btn-danger btn-rounded"
 				th:href="@{/logout}">Log Out</a>
@@ -66,10 +69,10 @@
 						<td th:text="${driver['carModel']}"></td>
 						<td th:text="${driver['carRegNo']}"></td>
 						<td th:text="${driver['activationStatus']}"></td>
-						<td><a class="btn btn-secondary"
+						<td><a class="btn btn-secondary rounded-pill"
 							th:href="@{'/update-driver/'+${driver['driverId']}}"
 							role="button">Update</a></td>
-						<td><a class="btn btn-info"
+						<td><a class="btn btn-info rounded-pill"
 							th:href="@{'/driver-ride-history/'+${driver['driverId']}}"
 							role="button">Ride History</a></td>
 					</tr>

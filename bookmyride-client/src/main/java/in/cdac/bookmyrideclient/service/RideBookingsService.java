@@ -104,4 +104,10 @@ public class RideBookingsService {
 				}).block();
 	}
 
+	public Map<String, String> updatePayment(RideBookings rideBookings) {
+		return webClient.post().uri("/rideBookings/updatePayment" ).bodyValue(rideBookings).retrieve()
+				.bodyToMono(new ParameterizedTypeReference<Map<String, String>>() {
+				}).block();
+	}
+
 }
