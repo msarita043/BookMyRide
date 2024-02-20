@@ -25,6 +25,9 @@
 			<span class="fs-4 fw-medium">Welcome </span><span class="fs-4"
 				th:text="${session.user['name']}"></span>
 		</p>
+		<div class="fs-1 fw-bolder text-light text-center">
+			<i class="fa-solid fa-car m-3"></i>Book My Ride
+		</div>
 		<div class="m-3">
 			<a type="button" class="btn btn-danger btn-rounded"
 				th:href="@{/logout}">Log Out</a>
@@ -81,9 +84,11 @@
 								</li>
 							</ul>
 							<div class="row">
-								<button type="button" class="btn btn-success rounded-pill col m-3 acceptRide"
+								<button type="button"
+									class="btn btn-success rounded-pill col m-3 acceptRide"
 									th:attr="data-rideId=${rideBooking['rideId']},data-userId=${session.user['userId']}">Accept</button>
-								<button type="button" class="btn btn-danger rounded-pill col m-3 declineRide"
+								<button type="button"
+									class="btn btn-danger rounded-pill col m-3 declineRide"
 									th:attr="data-rideid=${rideBooking['rideId']},data-userid=${session.user['userId']}">Decline</button>
 							</div>
 						</div>
@@ -99,8 +104,7 @@
 			<h4>Upcoming Rides</h4>
 		</div>
 		<div class="d-flex align-content-start flex-wrap mb-5">
-			<div class="card m-3 w-100"
-				th:each="rideBooking : ${upcomingRides}">
+			<div class="card m-3 w-100" th:each="rideBooking : ${upcomingRides}">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="card-body">

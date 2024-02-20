@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.cdac.bookmyrideclient.model.Driver;
+import in.cdac.bookmyrideclient.model.RideBookings;
 import in.cdac.bookmyrideclient.service.DriverService;
 import in.cdac.bookmyrideclient.service.RideBookingsService;
 
@@ -40,5 +41,10 @@ public class BookingsRestController {
 	public Map<String, String> canceleRide(@RequestBody Map<String, Integer> input){
 		Integer rideId = input.get("rideId");
 		return rideBookingsService.cancelRide(rideId);
+	}
+	
+	@PostMapping("/updatePayment")
+	public Map<String, String> updatePayment(@RequestBody RideBookings rideBookings){
+		return rideBookingsService.updatePayment(rideBookings);
 	}
 }

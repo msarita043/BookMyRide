@@ -25,6 +25,9 @@
 			<span class="fs-4 fw-medium">Welcome </span><span class="fs-4"
 				th:text="${session.user['name']}"></span>
 		</p>
+		<div class="fs-1 fw-bolder text-light text-center">
+			<i class="fa-solid fa-car m-3"></i>Book My Ride
+		</div>
 		<div class="m-3">
 			<a type="button" class="btn btn-secondary btn-rounded"
 				th:href="@{/driver-dashboard}"> <i
@@ -44,6 +47,9 @@
 						<th scope="col">Pickup Address</th>
 						<th scope="col">Travel Hours</th>
 						<th scope="col">Fare (Rs.)</th>
+						<th scope="col">Payment Status</th>
+						<th scope="col">Payment Method</th>
+						<th scope="col">Option</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -55,12 +61,107 @@
 						<td th:text="${rideBooking['pickupAddress']}"></td>
 						<td th:text="${rideBooking['noOfHours']}"></td>
 						<td th:text="${rideBooking['charges']}"></td>
+						<td th:text="${rideBooking['paymentStatus']}"></td>
+						<td th:text="${rideBooking['paymentMethod']}"></td>
+						<td><button type="button"
+								th:if="${rideBooking['updatePaymentBefore'].after(#dates.createNow())}"
+								th:attr="data-rideId=${rideBooking['rideId']}"
+								class="btn btn-info rounded-pill" data-mdb-ripple-init
+								data-mdb-modal-init data-mdb-target="#updatePayment">Payment</button></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="updatePayment" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="#" id="updatePaymentForm">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Update Payment
+							Status</h5>
+						<button type="button" class="btn-close" data-mdb-ripple-init
+							data-mdb-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="row mb-3">
+							<input id="rideId" name="rideId" type="text" hidden=true>
+							<div class="col">
+								<label for="paymentStatus">Payment Status</label>
+							</div>
+							<div class="col">
+								<select class="form-control rounded-pill" name="paymentStatus"
+									id="paymentStatus">
+									<option selected="true" value="PAID">PAID</option>
+									<option value="NOT_PAID">NOT PAID</option>
+								</select>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col">
+								<label for="paymentMethod">Payment Method</label>
+							</div>
+							<div class="col">
+								<select class="form-control rounded-pill" name="paymentMethod"
+									id="paymentMethod">
+									<option selected="true" value="CASH">CASH</option>
+									<option value="ONLINE">ONLINE</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary rounded-pill"
+							data-mdb-ripple-init data-mdb-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary rounded-pill"
+							data-mdb-ripple-init>Save changes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+	<script type="text/javascript">
+		const myModal = document.querySelector('#updatePayment');
+		myModal.addEventListener('shown.bs.modal', function(event) {
+			console.log('Modal is shown!');
+			const rideid = event.relatedTarget.getAttribute('data-rideid');;
+			console.log(rideid);
+			document.querySelector('#rideId').value = rideid;
+		});
+
+		const myForm = document.querySelector('#updatePaymentForm');
+		myForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+			const paymentMethod = myForm.elements.paymentMethod.value;
+			const paymentStatus = myForm.elements.paymentStatus.value;
+			const rideId = myForm.elements.rideId.value;
+			console.log(paymentMethod + " " + paymentStatus + " "+rideId);
+			var myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/json");
+			var raw = JSON.stringify({
+				"paymentMethod":paymentMethod,
+				"paymentStatus":paymentStatus,
+				"rideId":rideId
+			});
+			var requestOptions = {
+			  method: 'POST',
+			  headers: myHeaders,
+			  body: raw,
+			  redirect: 'follow'
+			};
+			fetch("/updatePayment", requestOptions)
+			  .then(response => response.text())
+			  .then(result => {
+				  let res = JSON.parse(result);
+				  alert(res.message);
+				  window.location.reload();
+			  })
+			  .catch(error => console.log('error', error));
+		});
+	</script>
 </body>
 </html>

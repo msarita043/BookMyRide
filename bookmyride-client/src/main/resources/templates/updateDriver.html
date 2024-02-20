@@ -26,6 +26,9 @@
 			<span class="fs-4 fw-medium">Welcome </span><span class="fs-4"
 				th:text="${session.user['name']}"></span>
 		</p>
+		<div class="fs-1 fw-bolder text-light text-center">
+			<i class="fa-solid fa-car m-3"></i>Book My Ride
+		</div>
 		<div class="m-3">
 			<a type="button" class="btn btn-secondary btn-rounded"
 				th:href="@{/admin-dashboard}"> <i class="fa-solid fa-arrow-left"></i>
@@ -122,8 +125,8 @@
 					</select>
 				</div>
 				<div class="col col-md-4 col-sm-12">
-					<p th:if="${#fields.hasErrors('activationStatus')}" th:errors="*{activationStatus}"
-						th:errorclass="text-danger"></p>
+					<p th:if="${#fields.hasErrors('activationStatus')}"
+						th:errors="*{activationStatus}" th:errorclass="text-danger"></p>
 				</div>
 			</div>
 

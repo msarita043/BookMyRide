@@ -129,4 +129,16 @@ public class RideBookingsController {
 		return rideBookingsDao.findPreviousRidesByDriver(driverId, new Date());
 	}
 
+	@PostMapping("/updatePayment")
+	public Map<String, String> updatePayment(@RequestBody RideBookings rideBooking) {
+		Map<String, String> res = new HashMap<String, String>();
+		Optional<RideBookings> rideOptional = rideBookingsDao.findById(rideBooking.getRideId());
+		RideBookings rideBookings = rideOptional.get();
+		rideBookings.setPaymentMethod(rideBooking.getPaymentMethod());
+		rideBookings.setPaymentStatus(rideBooking.getPaymentStatus());
+		rideBookingsDao.save(rideBookings);
+		res.put("message", "Payment Status Updated.");
+		return res;
+	}
+
 }
