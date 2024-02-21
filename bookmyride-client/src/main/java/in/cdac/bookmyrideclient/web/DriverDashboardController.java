@@ -1,10 +1,13 @@
 package in.cdac.bookmyrideclient.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import in.cdac.bookmyrideclient.enums.ActivationStatus;
 import in.cdac.bookmyrideclient.enums.Roles;
 import in.cdac.bookmyrideclient.model.Driver;
 import in.cdac.bookmyrideclient.model.RideBookings;
@@ -33,8 +36,12 @@ public class DriverDashboardController {
 		}
 
 		Driver d = driverService.getDriverByUserId(users.getUserId());
-		List<RideBookings> currentRequests = rideBookingsService
-				.getAllUpcomingRidesByCarTypeId(d.getCarType().getCarTypeId(), d);
+		List<RideBookings> currentRequests;
+		if (d.getActivationStatus().equals(ActivationStatus.ACTIVE)) {
+			currentRequests = rideBookingsService.getAllUpcomingRidesByCarTypeId(d.getCarType().getCarTypeId(), d);
+		} else {
+			currentRequests = new ArrayList<>();
+		}
 		model.addAttribute("currentRequests", currentRequests);
 		List<RideBookings> upcomingRides = rideBookingsService.getAllUpcomingRides(d.getDriverId());
 		model.addAttribute("upcomingRides", upcomingRides);
